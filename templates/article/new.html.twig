@@ -1,0 +1,49 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel article | Blogify{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h1>Créer un article</h1>
+
+    <form method="POST" action="{{ path('article_new') }}">
+        <div class="mb-3">
+            <label for="title">Titre</label>
+            <input
+                id="title"
+                type="text"
+                name="title"
+                class="form-control"
+                maxlength="255"
+                required
+            >
+        </div>
+
+        <div class="mb-3">
+            <label for="excerpt">Résumé</label>
+            <textarea
+                id="excerpt"
+                name="excerpt"
+                class="form-control"
+                required
+            ></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="content">Contenu</label>
+            <textarea
+                id="content"
+                name="content"
+                class="form-control"
+                rows="8"
+                required
+            ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Publier
+        </button>
+    </form>
+</div>
+{% endblock %}
