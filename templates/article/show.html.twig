@@ -1,0 +1,33 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title }} - Blogify{% endblock %}
+
+{% block body %}
+    <main class="container py-5">
+        <a href="{{ path('article_index') }}"
+           class="btn btn-outline-secondary mb-4">
+            ← Retour aux articles
+        </a>
+
+        <article>
+            <h1>{{ article.title }}</h1>
+
+            <p class="text-muted">
+                Publié le {{ article.publishedAt|date('d/m/Y à H:i') }}
+            </p>
+
+            <p class="lead">{{ article.excerpt }}</p>
+
+            <hr>
+
+            <div>
+                {{ article.content }}
+            </div>
+            <a href="{{ path('article_edit', {id: article.id}) }}"
+            class="btn btn-dark mt-4">
+                Modifier l'article
+            </a>
+        </article>
+    </main>
+{% endblock %}

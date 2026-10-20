@@ -1,0 +1,68 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ article.title }} - Blogify{% endblock %}
+
+{% block body %}
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <a href="{{ path('article_show', {id: article.id}) }}"
+                   class="btn btn-outline-secondary mb-4">
+                    ← Retour à l'article
+                </a>
+
+                <h1 class="mb-4">Modifier l'article</h1>
+
+                <form method="POST"
+                      action="{{ path('article_edit', {id: article.id}) }}">
+
+                    <div class="mb-3">
+                        <label for="title" class="form-label">
+                            Titre
+                        </label>
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            class="form-control"
+                            value="{{ article.title }}"
+                            maxlength="255"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="excerpt" class="form-label">
+                            Extrait
+                        </label>
+                        <textarea
+                            id="excerpt"
+                            name="excerpt"
+                            class="form-control"
+                            rows="3"
+                            required
+                        >{{ article.excerpt }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="content" class="form-label">
+                            Contenu
+                        </label>
+                        <textarea
+                            id="content"
+                            name="content"
+                            class="form-control"
+                            rows="10"
+                            required
+                        >{{ article.content }}</textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark">
+                        Enregistrer les modifications
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -7,6 +7,12 @@
 <div class="container py-5">
     <h1>Créer un article</h1>
 
+    {% for message in app.flashes('error') %}
+        <div class="alert ">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <form method="POST" action="{{ path('article_new') }}">
         <div class="mb-3">
             <label for="title">Titre</label>

@@ -1,64 +1,126 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}Blogify{% endblock %}</title>
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Blogify — Des idées, des histoires et des perspectives.">
+
+    <title>{% block title %}Blogify — Le journal des idées{% endblock %}</title>
 
     {% block stylesheets %}
         {{ importmap('app') }}
     {% endblock %}
 </head>
-<body class="bg-light">
 
-    <nav class="navbar navbar-expand-lg bg-white border-bottom">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="{{ path('app_home') }}">
-                Blogify<span class="text-primary">.</span>
-            </a>
+<body class="blogify-body">
 
-            <button class="navbar-toggler" type="button"
+    {# Barre de navigation #}
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg blogify-navbar">
+            <div class="container">
+
+                <a class="navbar-brand blogify-logo"
+                   href="{{ path('app_home') }}">
+                    blogify<span>.</span>
+                </a>
+
+                <button
+                    class="navbar-toggler blogify-toggler"
+                    type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#mainNavbar"
                     aria-controls="mainNavbar"
                     aria-expanded="false"
                     aria-label="Ouvrir le menu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="mainNavbar">
-                <ul class="navbar-nav ms-auto gap-lg-3">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ path('app_home') }}">
-                            Accueil
+                <div class="collapse navbar-collapse" id="mainNavbar">
+
+                    <ul class="navbar-nav mx-auto blogify-nav">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{{ path('app_home') }}">
+                                Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{{ path('article_index') }}">
+                                Articles
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="navbar-actions">
+                        <a href="{{ path('article_new') }}"
+                           class="btn btn-dark blogify-create-btn">
+                            Écrire un article
+                            <span aria-hidden="true">↗</span>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#articles">
-                            Articles
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('article_new') }}" class="btn btn-primary">
-                            Ajouter un article
-                        </a>
-                    </li>
-                </ul>
+                    </div>
+
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <main>
+        <div class="header-rule"></div>
+    </header>
+
+    {# Notifications Symfony #}
+    <main class="site-main">
+
+        {% for message in app.flashes('success') %}
+            <div class="container flash-container">
+                <div class="alert blogify-alert" role="status">
+                    <span class="flash-icon" aria-hidden="true">✓</span>
+                    {{ message }}
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Fermer"></button>
+                </div>
+            </div>
+        {% endfor %}
+
         {% block body %}{% endblock %}
+
     </main>
 
-    <footer class="bg-white border-top py-4 mt-5">
-        <div class="container text-center text-secondary">
-            <p class="mb-0">
-                &copy; {{ "now"|date("Y") }} Blogify. Tous droits réservés.
-            </p>
+    {# Pied de page #}
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-top">
+                <a href="{{ path('app_home') }}"
+                   class="footer-logo">
+                    blogify<span>.</span>
+                </a>
+
+                <p class="footer-description">
+                    Un espace pour les idées qui méritent d'être lues.
+                </p>
+
+                <a href="{{ path('article_new') }}"
+                   class="footer-write-link">
+                    Partager une idée <span aria-hidden="true">↗</span>
+                </a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    © {{ "now"|date("Y") }} Blogify.
+                    Tous droits réservés.
+                </p>
+
+                <p class="footer-note">
+                    Pensé pour les curieux.
+                </p>
+            </div>
+
         </div>
     </footer>
 

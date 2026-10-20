@@ -10,9 +10,9 @@
         {% for article in articles %}
             <article class="card mb-4">
                 <div class="card-body">
-                    <h2 class="card-title">
+                    <a href="{{ path('article_show', {id: article.id}) }}">
                         {{ article.title }}
-                    </h2>
+                    </a>
 
                     <p class="text-muted">
                         Publié le
