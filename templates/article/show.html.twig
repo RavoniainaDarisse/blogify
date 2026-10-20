@@ -28,6 +28,17 @@
             class="btn btn-dark mt-4">
                 Modifier l'article
             </a>
+
+
+        <form method="POST"
+            action="{{ path('article_delete', {id: article.id}) }}"
+            onsubmit="return confirm('Voulez-vous vraiment supprimer cet article ?');">
+
+            <button type="submit" class="btn btn-outline-danger mt-4">
+                Supprimer l'article
+            </button>
+        </form>
+
         </article>
     </main>
 {% endblock %}

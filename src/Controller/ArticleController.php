@@ -126,5 +126,30 @@ final class ArticleController extends AbstractController
 
 
 
+    #[Route('/articles/{id}/delete', name: 'article_delete', methods: ['POST'])]
+    public function delete(
+        int $id,
+        ArticleRepository $articleRepository,
+        EntityManagerInterface $em
+    ): Response {
+        $article = $articleRepository->find($id);
+
+        if ($article === null) {
+            throw $this->createNotFoundException(
+                'Cet article n’existe pas.'
+            );
+        }
+
+        $em->remove($article);
+        $em->flush();
+
+        $this->addFlash('success', 'Article supprimé avec succès !');
+
+        return $this->redirectToRoute('article_index');
+    }
+
+
+
+
     
 }
